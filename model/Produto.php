@@ -19,7 +19,8 @@ class Produto
     private $tipo;
     private $status;
 
-    public function __construct($nome, $descricao, $precoCusto, $precoVenda, $fornecedor, $tipo, $status)
+    public function __construct($nome, $descricao, $precoCusto, $precoVenda,
+                                $fornecedor, $tipo, $status)
     {
         $this->nome = $nome;
         $this->descricao = $descricao;
@@ -34,21 +35,6 @@ class Produto
 
     }
 
-    /**
-     * @param mixed $idProduto
-     */
-    public function setIdProduto($idProduto)
-    {
-        $this->idProduto = $idProduto;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getIdProduto()
-    {
-        return $this->idProduto;
-    }
 
     /**
      * @return mixed
