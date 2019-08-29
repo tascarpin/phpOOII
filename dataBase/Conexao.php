@@ -10,22 +10,22 @@ namespace dataBase;
 
 include "Configuracao.php";
 
-class Conexao
+abstract class Conexao
 {
-    private $conexao;
-
-    public function __construct()
+    public function conectar()
     {
-        $this->conexao = mysqli_connect(MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD );
-        if (mysqli_connect_errno($this->conexao)) {
-            echo "Problemas para conectar no banco. Verifique os dados!";
+        $conexao = mysqli_connect(MYSQL_HOST, MYSQL_USER,
+            MYSQL_PASSWORD, MYSQL_DBNAME );
+        if (mysqli_connect_errno($conexao)) {
+            echo "Problemas para conectar no banco.";
             die();
         }else{
-            echo "Conexão realizada com suscesso.";
+            return $conexao;
+            echo "Conexão realizada com sucesso.";
         }
     }
 
-    public function __destruct(){
-        @mysqli_close($this->conexao);
+    public function desconectar($conexao){
+        mysqli_close($conexao);
     }
 }

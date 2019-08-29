@@ -8,16 +8,15 @@
 
 namespace model;
 
-class Produto
+class Produto extends Model
 {
-    private $idProduto;
-    private $nome;
-    private $descricao;
-    private $precoCusto;
-    private $precoVenda;
-    private $fornecedor;
-    private $tipo;
-    private $status;
+    protected $nome;
+    protected $descricao;
+    protected $precoCusto;
+    protected $precoVenda;
+    protected $fornecedor;
+    protected $tipo;
+    protected $status;
 
     public function __construct($nome, $descricao, $precoCusto, $precoVenda,
                                 $fornecedor, $tipo, $status)

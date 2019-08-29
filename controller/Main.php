@@ -9,11 +9,13 @@
 //include('..\model\Produto.php');
 include('..\autoload.php');
 
-use model\Produto;
-use dataBase\Conexao;
+use model\Produto as Produto;
+use model\Model as Model;
 
-$conexao = new Conexao();
-echo '<br>';
+//Model::criar(new Produto('coca', 'mata verme', 1.8, 3.5,
+//    'Spaipa', 'Refrigerante', 'Ativo'));
 
-$conexao->criar(new Produto('coca', 'mata verme', 1.8, 3.5,
-    'Spaipa', 'Refrigerante', 'Ativo'));
+$tabela = "Produto";
+$parametro = array(0=>'*');
+
+var_dump(Model::ler("$tabela", $parametro));
