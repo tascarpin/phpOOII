@@ -8,87 +8,52 @@
 
 namespace model;
 
-class Produto extends Model
+use controller\ProdutoController;
+
+class Produto extends ProdutoController
 {
-    protected $nome;
-    protected $descricao;
-    protected $precoCusto;
-    protected $precoVenda;
-    protected $fornecedor;
-    protected $tipo;
-    protected $status;
+    private $tabela = 'produto';
+    private $atributos = array('nome', 'descricao',
+        'precoCusto', 'precoVenda', 'fornecedor', 'tipo', 'status');
+    private $valores;
 
-    public function __construct($nome, $descricao, $precoCusto, $precoVenda,
-                                $fornecedor, $tipo, $status)
+    public function __construct($nome=null, $descricao=null, $precoCusto=null, $precoVenda=null,
+                                $fornecedor=null, $tipo=null, $status=null)
     {
-        $this->nome = $nome;
-        $this->descricao = $descricao;
-        $this->precoCusto = $precoCusto;
-        $this->precoVenda = $precoVenda;
-        $this->tipo = $tipo;
-        $this->status = $status;
-
-        if(is_object($fornecedor)){
-            $this->fornecedor = $fornecedor;
-        }
-
+        $this->valores = [
+            'nome'=>$nome,
+            'descricao'=>$descricao,
+            'precoCusto'=>$precoCusto,
+            'precoVenda'=>$precoVenda,
+            'fornecedor'=>$fornecedor,
+            'tipo'=> $tipo,
+            'status'=>$status
+        ];
     }
 
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getNome()
+    public function getTabela()
     {
-        return $this->nome;
+        return $this->tabela;
     }
 
     /**
-     * @return mixed
+     * @return array
      */
-    public function getDescricao()
+    public function getAtributos()
     {
-        return $this->descricao;
+        return $this->atributos;
     }
 
     /**
-     * @return mixed
+     * @return array
      */
-    public function getPrecoCusto()
+    public function getValores()
     {
-        return $this->precoCusto;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPrecoVenda()
-    {
-        return $this->precoVenda;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFornecedor()
-    {
-        return $this->fornecedor;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTipo()
-    {
-        return $this->tipo;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getStatus()
-    {
-        return $this->status;
+        return $this->valores;
     }
 
     public function __destruct()
