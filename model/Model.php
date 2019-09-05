@@ -8,31 +8,36 @@
 
 namespace model;
 
-use dataBase\Conexao as Conexao;
-
-abstract class Model
+trait Model
 {
     public function criar($objeto){
-        $query  = "INSERT INTO produto";
-        $query .= " (`".implode("`, `", array_keys(get_object_vars($objeto)))."`)";
-        $query .= " VALUES ('";
-        $query .= implode("', '", (array)$objeto)."') ";
-
-        $conexao = Conexao::conectar();
-            mysqli_query($conexao,$query);
-        Conexao::desconectar($conexao);
+        $query  = "INSERT INTO ";
+        $query  .= $objeto->getTabela();
+        $query .= " (".implode(", ", $objeto->getAtributos()) . ")";
+        $query .= " VALUES";
+        return $query .= " ('" .implode("', '", $objeto->getValores())."')";
     }
 
-    public function ler($tabela, $parametro){
-        $query  = "SELECT";
-        $query .= " (`".implode("`, `", array_keys($parametro))."`)";
-        $query .= " FROM " . $tabela;
+    public function listar($objeto, $condicao = array()) {
+        $query  = "SELECT ";
+        $query .= implode(", ", $objeto->getAtributos());
+        $query .= " FROM " . $objeto->getTabela();
+        $condicao != null? $query .= " WHERE " . implode(", ", array_values($condicao)):"";
+        return $query;
+    }
 
-        var_dump($query);
+    public function editar($tabela, $atributos, $condicao){
+        $query  = "UPDATE " . $tabela;
+        $query .= " SET ";
+        $query .= implode(", ", array_values($atributos));
+        $query .= " WHERE ";
+        return $query .= implode(", ", array_values($condicao));
+    }
 
-//        $conexao = Conexao::conectar();
-//            return mysqli_fetch_all(mysqli_query($conexao,$query));
-//        Conexao::desconectar($conexao);
+    public function deletar($tabela, $condicao = array()){
+        $query  = "DELETE FROM " . $tabela;
+        $condicao != null? $query .= " WHERE " . implode(", ", array_values($condicao)):"";
+        return $query;
     }
 
 }
