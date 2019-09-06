@@ -8,8 +8,7 @@
 
 namespace model;
 
-
-class pedido
+class Pedido
 {
     private $idPedido;
     private $codigo;
