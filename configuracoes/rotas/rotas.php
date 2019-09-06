@@ -6,4 +6,8 @@
  * Time: 15:44
  */
 
-$rotas = ["home"];
+$rotas = [
+    "/" => "HomeController::index()",
+    "home" => "HomeController::index()",
+    "produto" => "ProdutoController::index()"
+];
