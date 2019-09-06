@@ -10,16 +10,15 @@ use http\Route as Route;
 
 abstract class App
 {
-    private $response;
+    private static $response;
 
     public function response(){
-        return $this->response;
+        return self::$response;
     }
 
     public function request(){
         $metodo = $_SERVER['REQUEST_METHOD'];
-        $recurso = explode("/", substr(@$_SERVER['PATH_INFO'], 1));
-
+        $recurso = explode("/", substr(@$_SERVER['REQUEST_URI'], 1));
         switch ($metodo ) {
             case 'PUT':
                 Route::put($recurso);
@@ -42,4 +41,4 @@ abstract class App
 }
 
 App::request();
-//App::response();
+App::response();

@@ -15,7 +15,8 @@ use model\Produto as Produto;
 abstract class ProdutoController implements Controller
 {
     public function index(){
-        echo "View index de produto";
+        echo "Index produto";
+//        return __DIR__  . "/../view/produto/index.php";
     }
 
     public function criar($produto){

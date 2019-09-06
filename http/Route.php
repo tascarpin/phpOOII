@@ -8,6 +8,7 @@
 
 namespace http;
 use controller\ProdutoController as ProdutoController;
+use controller\HomeController as HomeController;
 
 abstract class Route{
 
@@ -25,14 +26,13 @@ abstract class Route{
 
     public function get($recurso)
     {
-        echo $recurso;
-        echo "get";
-//        $recurso::listar();
+        ($recurso[0] == 'home')? HomeController::index():null;
+        ($recurso[0] == 'produto')? ProdutoController::index():null;
     }
 
     public function delete($recurso)
     {
-        echo "cheguei";
+        echo "delete";
 //        $recurso::delete();
     }
 }
