@@ -18,7 +18,7 @@ abstract class App
 
     public function request(){
         $metodo = $_SERVER['REQUEST_METHOD'];
-        $recurso = explode("/", substr(@$_SERVER['REQUEST_URI'], 1));
+        $recurso = substr(@$_SERVER['REQUEST_URI'], 1);
         switch ($metodo ) {
             case 'PUT':
                 Route::put($recurso);
@@ -33,7 +33,7 @@ abstract class App
                 Route::delete($recurso);
                 break;
             default:
-                header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
+                header($_SERVER["SERVER_PROTOCOL"]."404 Not Found");
                 die('{"msg": "Método não encontrado."}');
                 break;
         }
@@ -41,4 +41,4 @@ abstract class App
 }
 
 App::request();
-App::response();
+//App::response();

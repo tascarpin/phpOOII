@@ -7,33 +7,31 @@
  */
 
 namespace http;
-use controller\ProdutoController as ProdutoController;
-use controller\HomeController as HomeController;
 
 abstract class Route{
 
     public function put($recurso)
     {
         echo "put";
-//        $recurso::listar();
     }
 
     public function post($recurso)
     {
         echo "post";
-//        $recurso::post();
     }
 
     public function get($recurso)
     {
-        ($recurso[0] == 'home')? HomeController::index():null;
-        ($recurso[0] == 'produto')? ProdutoController::index():null;
+        $rotas = $GLOBALS['_ROTAS'];
+        $values = '';
+        array_key_exists($recurso, $rotas) == true ? $values = $rotas[$recurso] : exit('Página não encontrada');
+        $str = $values['controller'] . '::' . $values['funcao'];
+        call_user_func($str);
     }
 
     public function delete($recurso)
     {
         echo "delete";
-//        $recurso::delete();
     }
 }
 

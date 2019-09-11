@@ -11,7 +11,22 @@ namespace controller;
 abstract class HomeController
 {
     public function index(){
-        echo "Index home";
-//        return __DIR__  . "/../view/index.php";
+        require ('../resources/view/home/home.html');
     }
+     public function listar(){
+         require ('../resources/view/home/listaProdutos.html');
+     }
+
+     public function sobre(){
+         require ('../resources/view/home/sobre.html');
+     }
+
+     public function ajuda(){
+         require ('../resources/view/home/ajuda.html');
+     }
+
+     public function login(){
+         require ('../resources/view/home/login.html');
+//         header('Location: login');
+     }
 }

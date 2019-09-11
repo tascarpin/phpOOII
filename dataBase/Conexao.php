@@ -8,7 +8,7 @@
 
 namespace dataBase;
 
-include "Configuracao.php";
+include '../configuracoes/configuracao.php';
 
 trait Conexao
 {
