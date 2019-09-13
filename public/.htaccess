@@ -1,28 +1,4 @@
-<<<<<<< Updated upstream
-<IfModule mod_rewrite.c>
-    <IfModule mod_negotiation.c>
-        Options -MultiViews
-    </IfModule>
-
-    RewriteEngine On
-
-    # Redirect Trailing Slashes If Not A Folder
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)/$ /$1 [L,R=301]
-
-    # Handle Front Controller...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
-<<<<<<< Updated upstream
-    RewriteRule ^ index.php [L]
-</IfModule>
-=======
-    RewriteRule ^(.*)$ index.php [L]
-</IfModule>
-=======
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.php [QSA,L]
->>>>>>> Stashed changes
->>>>>>> Stashed changes
