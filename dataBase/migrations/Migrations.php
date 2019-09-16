@@ -8,7 +8,7 @@
 
 namespace dataBase\migrations;
 
-use dataBase\Conexao as Conexao;
+use config\Conexao as Conexao;
 
 trait Migrations
 {

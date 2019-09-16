@@ -6,7 +6,7 @@
  * Time: 20:49
  */
 
-namespace model;
+namespace app\model;
 
 
 class Usuario

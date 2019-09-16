@@ -6,7 +6,7 @@
  * Time: 19:25
  */
 
-namespace model;
+namespace app\model;
 
 class Pedido
 {

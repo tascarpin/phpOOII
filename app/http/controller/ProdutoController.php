@@ -6,23 +6,12 @@
  * Time: 19:36
  */
 
-namespace controller;
+namespace app\http\controller;
 
-use model\Model as Model;
-use dataBase\Conexao as Conexao;
-use model\Produto as Produto;
+use app\model\Model as Model;
 
 abstract class ProdutoController implements Controller
 {
-    public function index(){
-        echo "Index produto";
-//        return __DIR__  . "/../view/produto/index.php";
-    }
-
-    public function criar($produto){
-        mysqli_query(Conexao::conectar(), Model::criar($produto));
-        Conexao::desconectar();
-    }
 
     public function listar($condicao = array()){
         return mysqli_fetch_all(mysqli_query(Conexao::conectar(),Model::listar( new Produto(), $condicao)));

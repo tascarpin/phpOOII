@@ -6,7 +6,7 @@
  * Time: 20:21
  */
 
-namespace model;
+namespace app\model;
 
 
 class Fornecedor

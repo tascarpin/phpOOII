@@ -6,7 +6,7 @@
  * Time: 08:49
  */
 
-namespace model;
+namespace app\model;
 
 trait Model
 {

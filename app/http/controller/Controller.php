@@ -6,13 +6,13 @@
  * Time: 17:19
  */
 
-namespace controller;
+namespace app\http\controller;
 
 interface Controller
 {
     public function index();
     public function listar();
-    public function criar($objeto);
+    public function criar();
     public function editar();
     public function deletar();
 }

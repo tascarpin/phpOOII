@@ -6,5 +6,6 @@
  * Time: 12:17
  */
 
-require "../bootstrap/autoload.php";
-require_once "../bootstrap/App.php";
+require '../bootstrap/autoload.php';
+require '../vendor/autoload.php';
+require_once '../bootstrap/app.php';

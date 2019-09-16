@@ -7,6 +7,6 @@
  */
 
 function autoload ($className) {
-    require "../" . $className . ".php";
+    require '../' . $className . ".php";
 }
 spl_autoload_register("autoload");
