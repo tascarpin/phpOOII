@@ -19,7 +19,7 @@ class Produto
      * @Column(type="integer")
      * @GeneratedValue
      */
-    private $id;
+    private $idProduto;
     /**
      * @Column(type="string")
      */
@@ -52,9 +52,9 @@ class Produto
     /**
      * @return mixed
      */
-    public function getId()
+    public function getIdProduto()
     {
-        return $this->id;
+        return $this->idProduto;
     }
 
     /**

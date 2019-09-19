@@ -9,5 +9,15 @@
     "zendframework/zend-diactoros": "^2.1",
     "slim/http": "^0.8.0",
     "doctrine/orm": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "app\\": "app/"
+    },
+    "files": [
+      "dataBase/entityManager.php",
+      "dataBase/cli-config.php",
+      "config/database.php"
+    ]
   }
 }

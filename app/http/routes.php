@@ -18,11 +18,6 @@ $app->get('/hello/{name}', function (Request $request, Response $response, $args
     return $response;
 });
 
-$app->get('/helloWorld', function (Request $request, Response $response) {
-    $response->getBody()->write('Hello World');
-    return $response;
-});
-
 $app->get('/', function ($request, $response, $args) {
     HomeController::index();
     return $response;
@@ -33,7 +28,32 @@ $app->get('/home', function ($request, $response, $args) {
     return $response;
 });
 
-$app->get('/produtoCreate', function ($request, $response, $args) {
+$app->post('/produto', function ($request, $response, $args) {
     ProdutoModel::criar();
+    return $response;
+});
+
+$app->put('/produto', function ($request, $response, $args) {
+    ProdutoModel::listar();
+    return $response;
+});
+
+$app->put('/produto/{id}', function ($request, $response, $args) {
+    ProdutoModel::editar($args['id']);
+    return $response;
+});
+
+$app->patch('/produto/{id}', function ($request, $response, $args) {
+    ProdutoModel::alterar($args['id'], $request);
+    return $response;
+});
+
+$app->get('/produto/{id}', function ($request, $response, $args) {
+    ProdutoModel::procurar($args['id']);
+    return $response;
+});
+
+$app->delete('/produto/{id}', function ($request, $response, $args) {
+    ProdutoModel::deletar($args['id']);
     return $response;
 });

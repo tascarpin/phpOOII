@@ -14,6 +14,7 @@ $app = AppFactory::create();
 // Add error middleware
 $app->addErrorMiddleware(true, true, true);
 
+
 require '..\app\http\routes.php';
 
 $app->run();
