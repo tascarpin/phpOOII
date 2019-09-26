@@ -16,38 +16,38 @@ class Produto
 {
     /**
      * @Id
-     * @Column(type="integer")
-     * @GeneratedValue
+     * @Column(type="integer", nullable=false)
+     * @GeneratedValue(strategy="AUTO")
      */
     private $idProduto;
     /**
-     * @Column(type="string")
+     * @Column(type="string", length=50, nullable=false)
      */
     private $nome;
     /**
-     * @Column(type="string")
+     * @Column(type="string", length=150, options={"default":null})
      */
-    private $descricao = 'Descricao';
+    private $descricao;
     /**
-     * @Column(type="float")
+     * @Column(type="float", nullable=false, options={"default":0})
      */
-    private $precoCusto = 1.2;
+    private $precoCusto;
     /**
-     * @Column(type="float")
+     * @Column(type="float", nullable=false, options={"default":0})
      */
-    private $precoVenda = 3.5;
+    private $precoVenda;
     /**
-     * @Column(type="string")
+     * @Column(type="string", length=50, nullable=false, options={"default":"Fornecedor"})
      */
-    private $fornecedor = 'Fornecedor';
+    private $fornecedor;
     /**
-     * @Column(type="string")
+     * @Column(type="string", length=15, nullable=false, options={"default":"Tipo"})
      */
-    private $tipo = 'Salgado';
+    private $tipo;
     /**
-     * @Column(type="string")
+     * @Column(type="string", length=50, nullable=false, options={"default":"ATIVO"})
      */
-    private $status = 'Ativo';
+    private $status;
 
     /**
      * @return mixed

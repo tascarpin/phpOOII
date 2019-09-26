@@ -3,17 +3,16 @@
  * Created by PhpStorm.
  * User: Tassio Pinheiro
  * Date: 13/09/2019
- * Time: 15:18
+ * Time: 16:48
  */
 
-require_once "../vendor/autoload.php";
-
+use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 
-//$paths = array("/path/to/entity-files");
-$paths = array(__DIR__."app");
-$isDevMode = false;
+require_once "vendor/autoload.php";
+
+$isDevMode = true;
 
 // the connection configuration
 $dbParams = array(
@@ -23,5 +22,5 @@ $dbParams = array(
     'dbname'   => 'projeto_ooii',
 );
 
-$config = Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
-$entityManager = EntityManager::create($dbParams, $config);
+$config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."\src\app\model\\entity"), $isDevMode);
+return ConsoleRunner::createHelperSet(EntityManager::create($dbParams, $config));

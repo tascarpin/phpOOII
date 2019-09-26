@@ -8,16 +8,18 @@
     "http-interop/http-factory-guzzle": "^1.0",
     "zendframework/zend-diactoros": "^2.1",
     "slim/http": "^0.8.0",
-    "doctrine/orm": "*"
+    "doctrine/orm": "*",
+    "fzaninotto/faker": "^1.8",
+    "league/fractal": "^0.18.0",
+    "phpunit/phpunit": "^8.3"
   },
   "autoload": {
     "psr-4": {
-      "app\\": "app/"
+      "app\\": "src/app/"
     },
     "files": [
-      "dataBase/entityManager.php",
-      "dataBase/cli-config.php",
-      "config/database.php"
+      "src/dataBase/entityManager.php",
+      "src/config/database.php"
     ]
   }
 }
