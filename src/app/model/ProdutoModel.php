@@ -35,6 +35,7 @@ abstract class ProdutoModel
             $produto = $em->find(self::$path, $id);
             self::setAtributos($produto);
             $em->flush();
+            exit("Produto editado com sucesso.\n");
         }catch (ORMException $e){
             $e->metadataCacheNotConfigured();
         }
@@ -50,6 +51,7 @@ abstract class ProdutoModel
             $produto = $em->find(self::$path, $id);
             self::setAtributos($produto);
             $em->flush();
+            exit("Produto atualizado com sucesso.\n");
         }catch (ORMException $e){
             $e->metadataCacheNotConfigured();
         }
@@ -70,6 +72,7 @@ abstract class ProdutoModel
 
     public function show($id){
         $em = getEntityManager();
+        $produto = null;
         $produto = $em->find(self::$path, $id);
 
         if ($produto === null) {
@@ -85,6 +88,7 @@ abstract class ProdutoModel
             $produto = $em->find(self::$path, $id);
             $em->remove($produto);
             $em->flush();
+            exit("Produto deletado com sucesso.\n");
         }catch (ORMException $e){
             $e->metadataCacheNotConfigured();
         }

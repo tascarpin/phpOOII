@@ -55,7 +55,7 @@ $app->group('/produto', function (RouteCollectorProxy $group) {
     });
 
     //Action atualizar produto
-    $group->patch('/produto/{id}', function ($request, $response, $args) {
+    $group->patch('/{id}', function ($request, $response, $args) {
         ProdutoModel::update($args['id']);
         return $response;
     });
@@ -67,7 +67,7 @@ $app->group('/produto', function (RouteCollectorProxy $group) {
     });
 
     //Action deletar produto
-    $group->delete('/produto/{id}', function ($request, $response, $args) {
+    $group->delete('/{id}', function ($request, $response, $args) {
         ProdutoModel::destroy($args['id']);
         return $response;
     });
