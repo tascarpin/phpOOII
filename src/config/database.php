@@ -6,7 +6,7 @@
  * Time: 15:18
  */
 
-define('paths', $paths = array(__DIR__."app"));
+define('paths', $paths = array(__DIR__."\src\app\model\\entity"));
 define('dbParams',
     array(
         'driver'   => 'pdo_mysql',

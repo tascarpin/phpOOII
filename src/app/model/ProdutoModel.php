@@ -7,13 +7,18 @@
  */
 
 namespace app\model;
+
 use app\model\entity\Produto as Produto;
+use app\transformer\ProdutoTransformer as ProdutoTransformer;
+use League\Fractal\Resource\Collection as Collection;
+use League\Fractal\Resource\Item as Item;
+use League\Fractal\Serializer\JsonApiSerializer as JsonApiSerializer;
+use League\Fractal\Manager;
 use Doctrine\ORM\ORMException;
+
 
 abstract class ProdutoModel
 {
-    private static $path = 'app\model\entity\Produto';
-
     public function store(){
         $produto = new Produto();
         self::setAtributos($produto);
@@ -32,7 +37,7 @@ abstract class ProdutoModel
         $em = getEntityManager();
         $produto = null;
         try{
-            $produto = $em->find(self::$path, $id);
+            $produto = $em->find(Produto::class, $id);
             self::setAtributos($produto);
             $em->flush();
             exit("Produto editado com sucesso.\n");
@@ -48,7 +53,7 @@ abstract class ProdutoModel
         $em = getEntityManager();
         $produto = null;
         try{
-            $produto = $em->find(self::$path, $id);
+            $produto = $em->find(Produto::class, $id);
             self::setAtributos($produto);
             $em->flush();
             exit("Produto atualizado com sucesso.\n");
@@ -60,32 +65,41 @@ abstract class ProdutoModel
         }
     }
 
-    public function listAll(){
-        $em = getEntityManager();
-        $produtoRepository = $em->getRepository(self::$path);
-        $produtos = $produtoRepository->findAll();
-        header('Content-Type: application/json');
-        foreach ($produtos as $produto) {
-            self::imprimir($produto);
-        }
-    }
-
+    /**
+     * @param $id
+     * @return Item|null|object
+     * @throws ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \Doctrine\ORM\TransactionRequiredException
+     */
     public function show($id){
         $em = getEntityManager();
         $produto = null;
-        $produto = $em->find(self::$path, $id);
+        $produto = $em->find(Produto::class, $id);
+        //Transforma em JSON
+        ($produto === null)? exit("Produto não encontrado."):
+            $fractal = new Manager();
+            $fractal->setSerializer(new JsonApiSerializer());
+            $produto = new Item($produto, new ProdutoTransformer(), 'produto');
+            echo $fractal->createData($produto)->toJson();
+    }
 
-        if ($produto === null) {
-            exit("Produto não encontrado.");
-        }
-        self::imprimir($produto);
+    public function listAll(){
+        $em = getEntityManager();
+        $produtoRepository = $em->getRepository(Produto::class);
+        $produtos = $produtoRepository->findAll();
+        // Transforma em JSON
+        $fractal = new Manager();
+        $fractal->setSerializer(new JsonApiSerializer());
+        $produtos = new Collection($produtos, new ProdutoTransformer(), 'produto');
+        echo $fractal->createData($produtos)->toJson();
     }
 
     public function destroy($id = 5){
         $em = getEntityManager();
         $produto = null;
         try{
-            $produto = $em->find(self::$path, $id);
+            $produto = $em->find(Produto::class, $id);
             $em->remove($produto);
             $em->flush();
             exit("Produto deletado com sucesso.\n");
@@ -115,5 +129,4 @@ abstract class ProdutoModel
         if(isset($_GET['tipo'])){$produto->setTipo($_GET['tipo']);}
         if(isset($_GET['status'])){$produto->setStatus($_GET['status']);}
     }
-
 }

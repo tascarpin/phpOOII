@@ -12,7 +12,7 @@ namespace app\model\entity;
  * @Entity
  * @Table(name="itemPedido")
  */
-class itemPedido
+class ItemPedido
 {
     /**
      * @Id

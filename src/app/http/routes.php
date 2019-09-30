@@ -48,6 +48,12 @@ $app->group('/produto', function (RouteCollectorProxy $group) {
         return $response;
     });
 
+    //Action listar todos os produtos
+    $group->put('/listAll', function ($request, $response, $args) {
+        ProdutoModel::listAll();
+        return $response;
+    });
+
     //Action editar produto
     $group->get('/{id}/edit', function ($request, $response, $args) {
         ProdutoModel::edit($args['id']);
@@ -57,12 +63,6 @@ $app->group('/produto', function (RouteCollectorProxy $group) {
     //Action atualizar produto
     $group->patch('/{id}', function ($request, $response, $args) {
         ProdutoModel::update($args['id']);
-        return $response;
-    });
-
-    //Action listar todos os produtos
-    $group->put('/listAll', function ($request, $response, $args) {
-        ProdutoModel::listAll();
         return $response;
     });
 

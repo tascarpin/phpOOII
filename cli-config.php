@@ -22,5 +22,5 @@ $dbParams = array(
     'dbname'   => 'projeto_ooii',
 );
 
-$config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."\src\app\model\\entity"), $isDevMode);
+$config = Setup::createAnnotationMetadataConfiguration(paths, $isDevMode);
 return ConsoleRunner::createHelperSet(EntityManager::create($dbParams, $config));
