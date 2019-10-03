@@ -14,17 +14,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Routing\RouteCollectorProxy as RouteCollectorProxy;
 
 // Add route
-$app->get('/', function ($request, $response, $args) {
-    HomeController::index();
-    return $response;
-});
-
-$app->get('/home', function ($request, $response, $args) {
-    HomeController::index();
-    return $response;
-});
-
-$app->group('/produto', function (RouteCollectorProxy $group) {
+$app->group('/produtos', function (RouteCollectorProxy $group) {
     //Action index de produto
     $group->get('/index', function ($request, $response, $args) {
         echo 'index';
@@ -38,24 +28,24 @@ $app->group('/produto', function (RouteCollectorProxy $group) {
     });
 
     //Action armazenar produto
-    $group->post('/store', function ($request, $response, $args) {
+    $group->post('', function ($request, $response, $args) {
         ProdutoModel::store();
         return $response;
     });
     //Action mostrar um produto
-    $group->get('/show/{id}', function ($request, $response, $args) {
+    $group->get('/{id}', function ($request, $response, $args) {
         ProdutoModel::show($args['id']);
         return $response;
     });
 
     //Action listar todos os produtos
-    $group->put('/listAll', function ($request, $response, $args) {
-        ProdutoModel::listAll();
+    $group->get('', function ($request, $response, $args) {
+        ProdutoModel::list();
         return $response;
     });
 
     //Action editar produto
-    $group->get('/{id}/edit', function ($request, $response, $args) {
+    $group->put('/{id}', function ($request, $response, $args) {
         ProdutoModel::edit($args['id']);
         return $response;
     });

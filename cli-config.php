@@ -12,15 +12,6 @@ use Doctrine\ORM\EntityManager;
 
 require_once "vendor/autoload.php";
 
-$isDevMode = true;
-
 // the connection configuration
-$dbParams = array(
-    'driver'   => 'pdo_mysql',
-    'user'     => 'root',
-    'password' => '',
-    'dbname'   => 'projeto_ooii',
-);
-
 $config = Setup::createAnnotationMetadataConfiguration(paths, $isDevMode);
-return ConsoleRunner::createHelperSet(EntityManager::create($dbParams, $config));
+return ConsoleRunner::createHelperSet(EntityManager::create(dbParams, $config));

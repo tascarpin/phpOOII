@@ -10,6 +10,7 @@ namespace app\http\controller;
 
 interface Controller
 {
+    public function login();
     public function index();
     public function listar();
     public function criar();

@@ -84,7 +84,7 @@ abstract class ProdutoModel
             echo $fractal->createData($produto)->toJson();
     }
 
-    public function listAll(){
+    public function list(){
         $em = getEntityManager();
         $produtoRepository = $em->getRepository(Produto::class);
         $produtos = $produtoRepository->findAll();
