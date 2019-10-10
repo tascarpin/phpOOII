@@ -12,7 +12,7 @@ use app\model\entity\Produto as Produto;
 use app\transformer\ProdutoTransformer as ProdutoTransformer;
 use League\Fractal\Resource\Collection as Collection;
 use League\Fractal\Resource\Item as Item;
-use League\Fractal\Serializer\JsonApiSerializer as JsonApiSerializer;
+use League\Fractal\Serializer\ArraySerializer;
 use League\Fractal\Manager;
 use Doctrine\ORM\ORMException;
 
@@ -26,10 +26,10 @@ abstract class ProdutoModel
         try {
             $em->persist($produto);
             $em->flush();
-            exit("Produto cadastrado com sucesso.");
+            return "Produto cadastrado com sucesso.";//Deverá responder com um Json
         } catch (ORMException $e) {
             $e->metadataCacheNotConfigured();
-            exit("Falha ao criar produto.");
+            return "Falha ao criar produto.";
         }
     }
 
@@ -67,7 +67,6 @@ abstract class ProdutoModel
 
     /**
      * @param $id
-     * @return Item|null|object
      * @throws ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \Doctrine\ORM\TransactionRequiredException
@@ -79,7 +78,7 @@ abstract class ProdutoModel
         //Transforma em JSON
         ($produto === null)? exit("Produto não encontrado."):
             $fractal = new Manager();
-            $fractal->setSerializer(new JsonApiSerializer());
+            $fractal->setSerializer(new ArraySerializer());
             $produto = new Item($produto, new ProdutoTransformer(), 'produto');
             echo $fractal->createData($produto)->toJson();
     }
@@ -90,12 +89,12 @@ abstract class ProdutoModel
         $produtos = $produtoRepository->findAll();
         // Transforma em JSON
         $fractal = new Manager();
-        $fractal->setSerializer(new JsonApiSerializer());
+        $fractal->setSerializer(new ArraySerializer());
         $produtos = new Collection($produtos, new ProdutoTransformer(), 'produto');
         echo $fractal->createData($produtos)->toJson();
     }
 
-    public function destroy($id = 5){
+    public function destroy($id){
         $em = getEntityManager();
         $produto = null;
         try{
@@ -121,12 +120,14 @@ abstract class ProdutoModel
     }
 
     public function setAtributos($produto){
-        if(isset($_GET['nome'])){$produto->setNome($_GET['nome']);}
-        if(isset($_GET['descricao'])){$produto->setDescricao($_GET['descricao']);}
-        if(isset($_GET['precoCusto'])){$produto->setPrecoCusto($_GET['precoCusto']);}
-        if(isset($_GET['precoVenda'])){$produto->setprecoVenda($_GET['precoVenda']);}
-        if(isset($_GET['fornecedor'])){$produto->setFornecedor($_GET['fornecedor']);}
-        if(isset($_GET['tipo'])){$produto->setTipo($_GET['tipo']);}
-        if(isset($_GET['status'])){$produto->setStatus($_GET['status']);}
+        $json = file_get_contents('php://input');
+        $data = (array)json_decode($json);
+        if(isset($data['nome'])){$produto->setNome($data['nome']);}
+        if(isset($data['descricao'])){$produto->setDescricao($data['descricao']);}
+        if(isset($data['precoCusto'])){$produto->setPrecoCusto($data['precoCusto']);}
+        if(isset($data['precoVenda'])){$produto->setprecoVenda($data['precoVenda']);}
+        if(isset($data['fornecedor'])){$produto->setFornecedor($data['fornecedor']);}
+        if(isset($data['tipo'])){$produto->setTipo($data['tipo']);}
+        if(isset($data['status'])){$produto->setStatus($data['status']);}
     }
 }

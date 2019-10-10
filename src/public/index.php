@@ -7,4 +7,5 @@
  */
 
 require_once '../../vendor/autoload.php';
+require_once '../log/logger.php';
 require_once '../bootstrap/app.php';

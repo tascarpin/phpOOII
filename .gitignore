@@ -3,3 +3,5 @@
 /vendor
 /node-modules
 /site/node_modules
+src/dataBase/migrations/
+src/log/logger.php

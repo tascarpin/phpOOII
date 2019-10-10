@@ -31,6 +31,7 @@ $app->group('/produtos', function (RouteCollectorProxy $group) {
     $group->post('', function ($request, $response, $args) {
         ProdutoModel::store();
         return $response;
+
     });
     //Action mostrar um produto
     $group->get('/{id}', function ($request, $response, $args) {
@@ -45,13 +46,13 @@ $app->group('/produtos', function (RouteCollectorProxy $group) {
     });
 
     //Action editar produto
-    $group->put('/{id}', function ($request, $response, $args) {
+    $group->post('/{id}/edit', function ($request, $response, $args) {
         ProdutoModel::edit($args['id']);
         return $response;
     });
 
     //Action atualizar produto
-    $group->patch('/{id}', function ($request, $response, $args) {
+    $group->post('/{id}', function ($request, $response, $args) {
         ProdutoModel::update($args['id']);
         return $response;
     });

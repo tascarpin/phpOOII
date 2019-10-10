@@ -17,7 +17,12 @@ class ProdutoTransformer extends TransformerAbstract
         return [
             'id' => (int)$produto->getIdProduto(),
             'nome' => $produto->getNome(),
-            'descrição' => (int)$produto->getDescricao()
+            'descricao' => $produto->getDescricao(),
+            'precoCusto' => (float)$produto->getPrecoCusto(),
+            'precoVenda' => (float)$produto->getPrecoVenda(),
+            'fornecedor' => $produto->getFornecedor(),
+            'tipo' => $produto->getTipo(),
+            'status' => $produto->getStatus()
         ];
     }
 }
